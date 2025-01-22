@@ -1,26 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>New Flower Page</title>
 </head>
+
 <body>
 	<h1>Create a New Flower !</h1>
-    <p style="font-size:100px">🌸🌺🌻🌼🌷</p>
-	<form action="flower" method="POST">
-		<label for="name">Species:</label>
-		<input type="text" name="species" id="species" />
-        <label for="Common Name">Common Name:</label>
-        <input type="text" name="common-name" id="common-name" />
-        <label for="'isPerfect">Is this a "perfect" flower</label>
-        <input type="checkbox" name="'isPerfect" id="isPerfect"/>
-		<label for="vascular">Is this flower vascular?</label>
-		<input type="checkbox" name="vascular" id="vascular" />
-        <label type="text" name="photo" id="'photo">
-    
+	<p style="font-size:100px">🌸🌺🌻🌼🌷</p>
+	<form action="/flowers" method="POST">
+		<div>
+			<label for="species">Species:</label>
+			<input type="text" name="species" id="species" />
+		</div>
+		<div>
+			<label for="commoName">Common Name:</label>
+			<input type="text" name="commonName" id="commonName" />
+		</div>
+		<div>
+			<label for="'isPerfect">Is this a "perfect" flower</label>
+			<input type="checkbox" name="'isPerfect" id="isPerfect" />
+		</div>
+		<div>
+			<label for="image">Image Link (if available )</label>
+			<input type="text" name="image" id="image" />
+		</div>
+
 
 		<button type="submit">Add this flower!</button>
-	  </form>
+	</form>
 </body>
+
 </html>
