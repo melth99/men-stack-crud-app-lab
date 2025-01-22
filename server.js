@@ -34,14 +34,17 @@ app.get("/", (req, res) => {
 })
 //action - index all plants list! - WORKS
 app.get('/flowers', async (req,res) => {
+    try{
     const bouquet = await FlowerModel.find({})
     console.log(bouquet) //all flowers
     res.render("flowers/index.ejs",{flowerDoc: bouquet} )
+}   catch (error) {
+    console.error(error);
+    res.status(500).send('An error occurred while fetching flowers');
+}
 })
 
-app.get('/flowers', (req,res) => {
-    res.render("flowers/show.ejs")
-})  
+
 //render always look in views folder for ejs files
 app.get("/flowers/new", (req, res) => {
     res.render("flowers/new.ejs")
@@ -63,17 +66,24 @@ app.get('/flowers/:flowersId', async (req,res) => {
     console.log(flowerDoc)
     res.render('flowers/show.ejs', {flowerDoc: flowerDoc})
 })
+//presents editing page
 app.get('/flowers/:flowersId/edit', async (req,res) =>{
     console.log(req.params.flowersId)
     const flowerDoc = await FlowerModel.findById(req.params.flowersId)
     console.log(flowerDoc)
-    res.render('flowers/edit.ejs')
+    res.render('flowers/edit.ejs', {flowerDoc: flowerDoc})
 })
-app.put('/flowers/:flowersId/edit', async (req,res) =>{
+app.put('/flowers/:flowersId', async (req,res) =>{
     console.log(req.params.flowersId)
-    const updatedFlower = await FlowerModel.findByIdAndUpdate(req.params.flowersId)
-    console.log(flowerDoc)
-    res.render('/flowers/updatedflower')
+    req.body.isPerfect = !!req.body.isPerfect
+    const updatedData = req.body
+    const updatedFlower = await FlowerModel.findByIdAndUpdate(
+        req.params.flowersId,
+        updatedData,
+        { new: true, runValidators: true }
+    )
+    res.redirect('/flowers')
+    console.log((updatedFlower))
 
 })
 
