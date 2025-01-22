@@ -63,13 +63,26 @@ app.get('/flowers/:flowersId', async (req,res) => {
     console.log(flowerDoc)
     res.render('flowers/show.ejs', {flowerDoc: flowerDoc})
 })
+app.get('/flowers/:flowersId/edit', async (req,res) =>{
+    console.log(req.params.flowersId)
+    const flowerDoc = await FlowerModel.findById(req.params.flowersId)
+    console.log(flowerDoc)
+    res.render('flowers/edit.ejs')
+})
+app.put('/flowers/:flowersId/edit', async (req,res) =>{
+    console.log(req.params.flowersId)
+    const updatedFlower = await FlowerModel.findByIdAndUpdate(req.params.flowersId)
+    console.log(flowerDoc)
+    res.render('/flowers/updatedflower')
 
+})
 
 //DELETE
-
+//works
 app.delete('/flowers/:flowersId', async function(req, res){
-	const deletedFlower = await FlowerModel.findByIdAndDelete(req.params.fruitId)
+	const deletedFlower = await FlowerModel.findByIdAndDelete(req.params.flowersId)
 	res.redirect('/flowers')
+    console.log('deleted',deletedFlower)
     
 
 })

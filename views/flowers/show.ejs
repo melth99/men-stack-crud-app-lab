@@ -12,10 +12,11 @@
     <p> fa la la la la!</p>
     <p style="font-size:100px">🌸🌺🌻🌼🌷</p>
     
-    <form method="post" action="/flowers/<%=flowerDoc._id%>?method=DELETE">
+    <form method="post" action="/flowers/<%=flowerDoc._id%>?_method=DELETE">
       <button type="submit">delete flower </button>
-
     </form>
+    <form method="GET" action="/flowers/<%=flowerDoc._id%>/edit">
+      <button type="submit">edit flower </button>
   
   </body>
 </html>
